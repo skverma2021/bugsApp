@@ -16,7 +16,7 @@ import { AppService } from './app.service';
       host: 'localhost',
       port: 1433,
       username: 'udemy',
-      password: 'cdcbgt',
+      password: 'theUdemyUser',
       database: 'bugs',
       entities: [Bug, User, Comment],
       synchronize: true, // use false in production

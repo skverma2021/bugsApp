@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsEnum, IsDateString, IsInt } from 'class-validator';
+import { IsString, IsOptional, IsDateString, IsInt } from 'class-validator';
 
 export class CreateBugDto {
   @IsString()
