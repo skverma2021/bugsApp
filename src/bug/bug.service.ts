@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Bug } from './bug.entity';
@@ -24,8 +24,13 @@ async create(dto: CreateBugDto) {
     return this.bugRepo.find({ relations: ['openedBy', 'assignedTo', 'comments'] });
   }
 
-  findOne(id: number) {
-    return this.bugRepo.findOne({ where: { bugID: id }, relations: ['openedBy', 'assignedTo', 'comments'] });
+  async findOne(id: number) {
+    const bug =  await this.bugRepo.findOne({ where: { bugID: id }, relations: ['openedBy', 'assignedTo', 'comments'] });
+    if (!bug){
+      throw new NotFoundException(`the Bug with ID ${id} not found`)
+    }
+    return bug;
+
   }
 
 async update(id: number, dto: UpdateBugDto) {
